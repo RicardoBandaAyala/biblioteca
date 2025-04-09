@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    {% load static %}
+    <title>Perfil de usuario</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body>
+        <!-- Info usuario -->
+    <div class="container">
+        <h2>Perfil de usuario</h2>
+        <p><strong>Nombre:</strong> {{ usuario.username }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+    </div>
+</body>
+<p>   </p>
+    <!-- Lista libros prestados del usuario -->
+{% if libros_prestados %}
+<div class="container my-4">
+    <h3 class="text-center">Libros Prestados</h3>
+    <!-- Tabla de Libros Prestados -->
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Llenado de la tabla -->
+            {% for libro in libros_prestados %}
+            <tr>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="container my-4">
+    <h3 class="text-center">Libros Prestados</h3>
+    <p class="text-center text-muted">No tienes libros prestados.</p>
+</div>
+{% endif %}
+
+<a href="{% url 'listar_libros' %}" class="btn btn-secondary">Volver a la página de inicio</a>
+{% endblock %}

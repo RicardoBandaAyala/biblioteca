@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Sesión cerrada</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Has cerrado sesión.</h2>
+        <a href="{% url 'login' %}">Iniciar sesión nuevamente</a>
+    </div>
+</body>
+</html>

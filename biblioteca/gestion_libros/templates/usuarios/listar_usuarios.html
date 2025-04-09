@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-4">
+    <h2 class="text-center">Lista de usuarios</h2>
+        <!-- Tabla de usuarios -->
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Email</th>
+                <th>Libros prestados</th>
+            </tr>
+        </thead>
+        <tbody>
+                <!-- Llenado de la tabla -->
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.libros_prestados.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url 'listar_libros' %}" class="btn btn-secondary">Volver a la página de inicio</a>
+{% endblock %}

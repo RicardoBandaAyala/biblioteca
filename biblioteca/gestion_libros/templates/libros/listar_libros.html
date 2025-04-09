@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form method="GET" class="mb-4 text-center"> <!--text-center para texto centrado en pantalla-->
+    <input type="text" name="q" placeholder="Buscar libros..." class="form-control mb-2">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if messages %}
+<div class="container my-3">
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Apartado de libros  -->
+<div class="container my-4 w-100"> 
+    <h2 class="text-center">LIBROS LISTADOS</h2>
+    <div class="row justify-content-center">
+        {% for libro in libros %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <!-- Imagen statica en static/css -->
+                <img src="{% static 'css\foto.webp' %}" class="d-block w-100" alt="Imagen del libro">
+                <div class="card-body">
+                    <h5 title="{{ libro.titulo }}" class="card-title text-truncate">{{ libro.titulo }}</h5>
+                    <p class="card-text">{{ libro.autor }}</p>
+                    {% if libro.disponible %}
+                        <a href="{% url 'apartar_libro' libro.id %}" class="btn btn-primary w-100">Apartar</a>
+                    {% else %}
+                        <a href="{% url 'desapartar_libro' libro.id %}" class="btn btn-danger w-100">Devolver</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<a href="{% url 'registrar_libro' %}" class="btn btn-success">Registrar nuevo libro</a>
+{% endblock %}
